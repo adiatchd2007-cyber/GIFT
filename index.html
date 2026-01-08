@@ -15,11 +15,8 @@ overflow:hidden;
 
 /* STARS */
 .star{
-position:fixed;
-width:2px;
-height:2px;
-background:white;
-opacity:.8;
+position:fixed;width:2px;height:2px;
+background:white;opacity:.8;
 animation:twinkle 3s infinite alternate;
 }
 @keyframes twinkle{from{opacity:.3}to{opacity:1}}
@@ -121,21 +118,14 @@ const GIRL_NAME="Khushi";
 <source src="love.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1 : INTRO -->
+<!-- PAGE 1 -->
 <div class="page active">
 <h1 id="names"></h1>
 <p>Since 9 January 2021 💖</p>
 <button class="btn next">Enter ✨</button>
 </div>
 
-<!-- PAGE 2 : MUSIC PAGE (IMPORTANT) -->
-<div class="page">
-<h1>🎵 Play Our Song 🎵</h1>
-<p>Tap the button to begin the journey</p>
-<button class="btn" onclick="playMusic()">▶ Play Music</button>
-</div>
-
-<!-- PAGE 3 -->
+<!-- PAGE 2 -->
 <div class="page">
 <h1>📸 Photo Memories</h1>
 <img src="photo1.jpg.jpeg">
@@ -143,42 +133,50 @@ const GIRL_NAME="Khushi";
 <button class="btn next">Next ➤</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 3 -->
 <div class="page">
 <h1>🎥 Video Memory</h1>
 <video src="memory1.mp4" controls></video>
 <button class="btn next">Next ➤</button>
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 4 -->
 <div class="page">
 <h1>💖 Shayari</h1>
-<p>💞In duriyo ko karke dur tumhare paas aana chahta hu💞<br>
- 💞Tere in pyare haatho ka pyaar chahta hu💞<br>
- 💞Chahe ruthi rahe mujhse ye saari duniya💞<br>
- 💞Main toh bas tumhara hi saath chahta hu💞</p>
+<p>
+💞In duriyo ko karke dur tumhare paas aana chahta hu💞<br>
+💞Tere in pyare haatho ka pyaar chahta hu💞<br>
+💞Chahe ruthi rahe mujhse ye saari duniya💞<br>
+💞Main toh bas tumhara hi saath chahta hu💞
+</p>
 <button class="btn next">Next ➤</button>
 </div>
 
-<!-- PAGE 6 -->
+<!-- PAGE 5 -->
 <div class="page">
 <h1>💌 Message</h1>
-<p>🌌 In a dark and chaotic world, you became my favorite color 🎨, the light ✨ I never knew I was searching for 💫.
-🤍 Your presence softened my fears, healed silent wounds 💞, and filled my days with warmth 🌸 and meaning 🌷.
-💭 I never imagined someone could matter this deeply to me, yet here you are—changing my heart ❤️, my thoughts 🫶, and my life 🌍 in the most beautiful way 🌹.
-🌙 With you, even darkness feels gentle, because love 💖 has your name written all over it ♾️💖</p>
+<p>
+🌌 In a dark and chaotic world, you became my favorite color 🎨, the light ✨ I never knew I was searching for 💫.<br>
+🤍 Your presence softened my fears, healed silent wounds 💞, and filled my days with warmth 🌸 and meaning 🌷.<br>
+🌙 With you, even darkness feels gentle, because love 💖 has your name written all over it ♾️
+</p>
 <button class="btn next">Final Moment 💍</button>
 </div>
 
-<!-- PAGE 7 -->
+<!-- PAGE 6 : PROPOSAL -->
 <div class="page">
 <h1>Will You Be Mine Forever? 💕</h1>
 <button class="btn" onclick="yesClick()">YES</button>
 <button class="btn" id="no">NO</button>
+
+<!-- MUSIC BUTTON AFTER YES -->
+<div id="musicBox" style="display:none;margin-top:25px">
+<button class="btn" onclick="playMusic()">▶ Play Our Song 🎵</button>
+</div>
 </div>
 
 <script>
-document.getElementById("names").innerText=
+document.getElementById("names").innerText =
 BOY_NAME+" ❤️ "+GIRL_NAME;
 
 /* STARS */
@@ -193,25 +191,16 @@ document.body.appendChild(s);
 /* NAV */
 let pages=document.querySelectorAll(".page"),i=0;
 document.querySelectorAll(".next").forEach(b=>{
-b.onclick=()=>{pages[i++].classList.remove("active");pages[i].classList.add("active");};
+b.onclick=()=>{
+pages[i].classList.remove("active");
+pages[++i].classList.add("active");
+};
 });
 
-/* PLAY MUSIC (GUARANTEED) */
+/* MUSIC PLAY (CLICK ONLY) */
 function playMusic(){
-music.play();
-pages[i++].classList.remove("active");
-pages[i].classList.add("active");
+document.getElementById("music").play();
 }
-
-/* SWIPE */
-let sx=0;
-document.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
-document.addEventListener("touchend",e=>{
-if(sx-e.changedTouches[0].clientX>50 && i<pages.length-1){
-pages[i++].classList.remove("active");
-pages[i].classList.add("active");
-}
-});
 
 /* HEART + ROSE */
 setInterval(()=>{
@@ -230,7 +219,7 @@ document.body.appendChild(r);
 setTimeout(()=>r.remove(),8000);
 },1200);
 
-/* BUTTERFLIES */
+/* BUTTERFLY */
 for(let j=0;j<8;j++){
 let b=document.createElement("div");
 b.className="butterfly";b.innerHTML="🦋";
@@ -262,7 +251,8 @@ ring.style.left="50%";
 ring.style.top="50%";
 document.body.appendChild(ring);
 
-setTimeout(()=>alert("She said YES ❤️✨"),1300);
+/* SHOW MUSIC BUTTON */
+document.getElementById("musicBox").style.display="block";
 }
 </script>
 

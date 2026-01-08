@@ -8,7 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
-background:radial-gradient(circle at bottom,#2b0033,#000);
+background:radial-gradient(circle at bottom,#3b003f,#000);
 color:#fff;
 overflow:hidden;
 }
@@ -16,7 +16,7 @@ overflow:hidden;
 /* STARS */
 .star{
 position:fixed;width:2px;height:2px;
-background:white;opacity:.8;
+background:white;opacity:.7;
 animation:twinkle 3s infinite alternate;
 }
 @keyframes twinkle{from{opacity:.3}to{opacity:1}}
@@ -35,28 +35,61 @@ padding:20px;
 @keyframes fade{from{opacity:0;transform:scale(.95)}to{opacity:1}}
 
 /* TEXT */
-h1{color:#ffb3d9;margin-bottom:10px}
-p{max-width:600px;line-height:1.6;color:#ffd6eb}
+h1{
+color:#ff8fcf;
+margin-bottom:18px;
+font-size:30px;
+text-shadow:0 0 15px rgba(255,120,190,.7);
+}
+p{line-height:1.6;color:#ffd6eb}
 
 /* BUTTON */
 .btn{
-margin-top:20px;
-padding:14px 34px;
+margin-top:25px;
+padding:14px 36px;
 border:none;
 border-radius:40px;
 font-size:18px;
 background:linear-gradient(45deg,#ff4d9d,#ff85c1);
 color:#fff;
 cursor:pointer;
-box-shadow:0 0 25px rgba(255,100,180,.8);
+box-shadow:0 0 30px rgba(255,100,180,.9);
 }
 
-/* MEDIA */
-img,video{
-width:90%;max-width:420px;
-border-radius:18px;
-margin:12px 0;
-box-shadow:0 0 25px rgba(255,100,180,.8);
+/* PHOTO MEMORY GRID */
+.photo-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+width:100%;
+max-width:700px;
+margin-top:10px;
+}
+
+.photo-card{
+background:rgba(255,255,255,.06);
+backdrop-filter:blur(12px);
+border-radius:26px;
+padding:16px;
+box-shadow:0 0 35px rgba(255,90,170,.6);
+}
+
+.photo-card img{
+width:100%;
+border-radius:20px;
+box-shadow:0 0 20px rgba(255,90,170,.7);
+}
+
+.caption{
+margin-top:12px;
+font-size:20px;
+color:#ffe1f1;
+}
+
+.caption span{
+display:block;
+font-size:24px;
+margin-top:5px;
 }
 
 /* HEART + ROSE */
@@ -113,7 +146,6 @@ const BOY_NAME="Amit";
 const GIRL_NAME="Khushi";
 </script>
 
-<!-- AUDIO -->
 <audio id="music" loop>
 <source src="love.mp3" type="audio/mpeg">
 </audio>
@@ -125,18 +157,37 @@ const GIRL_NAME="Khushi";
 <button class="btn next">Enter ✨</button>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 : PHOTO MEMORIES -->
 <div class="page">
 <h1>📸 Photo Memories</h1>
+
+<div class="photo-grid">
+
+<div class="photo-card">
 <img src="photo1.jpg.jpeg">
+<div class="caption">
+That smile
+<span>💗</span>
+</div>
+</div>
+
+<div class="photo-card">
 <img src="photo2.jpg.jpeg">
-<button class="btn next">Next ➤</button>
+<div class="caption">
+My safe place
+<span>🤍</span>
+</div>
+</div>
+
+</div>
+
+<button class="btn next">Next 💕</button>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page">
 <h1>🎥 Video Memory</h1>
-<video src="memory1.mp4" controls></video>
+<video src="memory1.mp4" controls style="width:90%;max-width:420px;border-radius:20px;box-shadow:0 0 25px rgba(255,90,170,.7)"></video>
 <button class="btn next">Next ➤</button>
 </div>
 
@@ -156,22 +207,22 @@ const GIRL_NAME="Khushi";
 <div class="page">
 <h1>💌 Message</h1>
 <p>
-🌌 In a dark and chaotic world, you became my favorite color 🎨, the light ✨ I never knew I was searching for 💫.<br>
-🤍 Your presence softened my fears, healed silent wounds 💞, and filled my days with warmth 🌸 and meaning 🌷.<br>
-🌙 With you, even darkness feels gentle, because love 💖 has your name written all over it ♾️
+🌌 In a dark and chaotic world, you became my favorite color 🎨, the light ✨ I never knew I was searching for 💫.
+🤍 Your presence softened my fears, healed silent wounds 💞, and filled my days with warmth 🌸 and meaning 🌷.
+💭 I never imagined someone could matter this deeply to me, yet here you are—changing my heart ❤️, my thoughts 🫶, and my life 🌍 in the most beautiful way 🌹.
+🌙 With you, even darkness feels gentle, because love 💖 has your name written all over it ♾️💖
 </p>
 <button class="btn next">Final Moment 💍</button>
 </div>
 
-<!-- PAGE 6 : PROPOSAL -->
+<!-- PAGE 6 -->
 <div class="page">
 <h1>Will You Be Mine Forever? 💕</h1>
 <button class="btn" onclick="yesClick()">YES</button>
 <button class="btn" id="no">NO</button>
 
-<!-- MUSIC BUTTON AFTER YES -->
 <div id="musicBox" style="display:none;margin-top:25px">
-<button class="btn" onclick="playMusic()">▶ Play Our Song 🎵</button>
+<button class="btn" onclick="playMusic()">▶ Play Music 🎵</button>
 </div>
 </div>
 
@@ -188,7 +239,7 @@ s.style.top=Math.random()*100+"vh";
 document.body.appendChild(s);
 }
 
-/* NAV */
+/* PAGE NAV */
 let pages=document.querySelectorAll(".page"),i=0;
 document.querySelectorAll(".next").forEach(b=>{
 b.onclick=()=>{
@@ -197,12 +248,12 @@ pages[++i].classList.add("active");
 };
 });
 
-/* MUSIC PLAY (CLICK ONLY) */
+/* MUSIC */
 function playMusic(){
 document.getElementById("music").play();
 }
 
-/* HEART + ROSE */
+/* FALLING */
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";h.innerHTML="❤️";
@@ -220,22 +271,22 @@ setTimeout(()=>r.remove(),8000);
 },1200);
 
 /* BUTTERFLY */
-for(let j=0;j<8;j++){
+for(let j=0;j<7;j++){
 let b=document.createElement("div");
 b.className="butterfly";b.innerHTML="🦋";
 document.body.appendChild(b);
 }
 
-/* NO BUTTON MOVE */
+/* NO MOVE */
 const no=document.getElementById("no");
 setInterval(()=>{
 no.style.left=Math.random()*80+"%";
 no.style.top=Math.random()*80+"%";
 },700);
 
-/* YES CLICK */
+/* YES */
 function yesClick(){
-for(let k=0;k<30;k++){
+for(let k=0;k<25;k++){
 let f=document.createElement("div");
 f.className="firework";
 f.style.left=Math.random()*100+"vw";
@@ -243,15 +294,12 @@ f.style.top=Math.random()*100+"vh";
 document.body.appendChild(f);
 setTimeout(()=>f.remove(),1000);
 }
-
 let ring=document.createElement("div");
 ring.id="ring";
 ring.innerHTML="💍";
 ring.style.left="50%";
 ring.style.top="50%";
 document.body.appendChild(ring);
-
-/* SHOW MUSIC BUTTON */
 document.getElementById("musicBox").style.display="block";
 }
 </script>

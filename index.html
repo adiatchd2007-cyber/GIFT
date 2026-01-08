@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forever Love ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{
+background:radial-gradient(circle at bottom,#2b0033,#000);
+color:#fff;
+overflow:hidden;
+}
+
+/* STARS */
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+opacity:0.8;
+animation:twinkle 3s infinite alternate;
+}
+@keyframes twinkle{from{opacity:.3}to{opacity:1}}
+
+/* PAGE */
+.page{
+width:100vw;height:100vh;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+.page.active{display:flex;animation:fade 1s}
+@keyframes fade{from{opacity:0;transform:scale(.95)}to{opacity:1}}
+
+/* TEXT */
+h1{color:#ffb3d9;margin-bottom:10px}
+p{max-width:600px;line-height:1.6;color:#ffd6eb}
+
+/* BUTTON */
+.btn{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+border-radius:30px;
+font-size:16px;
+background:linear-gradient(45deg,#ff4d9d,#ff85c1);
+color:#fff;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,100,180,.7);
+}
+
+/* MEDIA */
+img,video{
+width:90%;max-width:420px;
+border-radius:18px;
+margin:12px 0;
+box-shadow:0 0 25px rgba(255,100,180,.8);
+}
+
+/* MUSIC BTN */
+#musicBtn{
+position:fixed;top:15px;right:15px;
+z-index:999;
+background:#ff4d9d;
+padding:10px;border-radius:50%;
+}
+
+/* HEART + ROSE */
+.heart,.petal{
+position:fixed;top:-10px;
+animation:fall 6s linear infinite;
+}
+.heart{font-size:18px}
+.petal{font-size:20px;animation-duration:8s}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+
+/* BUTTERFLY */
+.butterfly{
+position:fixed;font-size:22px;
+animation:fly 15s linear infinite;
+}
+@keyframes fly{
+0%{transform:translate(-10vw,100vh)}
+100%{transform:translate(110vw,-10vh)}
+}
+
+/* FIREWORK */
+.firework{
+position:fixed;
+width:6px;height:6px;
+border-radius:50%;
+background:#ff4d9d;
+animation:explode 1s forwards;
+}
+@keyframes explode{to{transform:scale(25);opacity:0}}
+
+/* RING ANIMATION */
+#ring{
+position:fixed;
+font-size:80px;
+opacity:0;
+animation:ringPop 2.5s forwards;
+filter:drop-shadow(0 0 20px gold);
+}
+@keyframes ringPop{
+0%{transform:scale(0);opacity:0}
+50%{transform:scale(1.2);opacity:1}
+100%{transform:scale(1);opacity:1}
+}
+
+/* NO BUTTON */
+#no{position:absolute}
+</style>
+</head>
+
+<body>
+
+<script>
+const BOY_NAME="Amit";
+const GIRL_NAME="Khushi";
+</script>
+
+<audio id="music" loop>
+<source src="love.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn">🎵</button>
+
+<!-- PAGE 1 -->
+<div class="page active">
+<h1 id="names"></h1>
+<p>Since 9 January 2021 💖</p>
+<button class="btn next">Enter ✨</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<h1>📸 Photo Memories</h1>
+<img src="photo1.jpg.jpeg">
+<img src="photo2.jpg.jpeg">
+<button class="btn next">Next ➤</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+<h1>🎥 Video Memory</h1>
+<video src="memory1.mp4" controls></video>
+<button class="btn next">Next ➤</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+<h1>💖 Shayari</h1>
+<p>💞In duriyo ko karke dur tumhare paas aana chahta hu💞<br>
+ 💞Tere in pyare haatho ka pyaar chahta hu💞<br>
+ 💞Chahe ruthi rahe mujhse ye saari duniya💞<br>
+ 💞Main toh bas tumhara hi saath chahta hu💞</p>
+<button class="btn next">Next ➤</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+<h1>💌 Message</h1>
+<p>🌌 In a dark and chaotic world, you became my favorite color 🎨, the light ✨ I never knew I was searching for 💫.
+🤍 Your presence softened my fears, healed silent wounds 💞, and filled my days with warmth 🌸 and meaning 🌷.
+💭 I never imagined someone could matter this deeply to me, yet here you are—changing my heart ❤️, my thoughts 🫶, and my life 🌍 in the most beautiful way 🌹.
+🌙 With you, even darkness feels gentle, because love 💖 has your name written all over it ♾️💖❤️</p>
+<button class="btn next">Final Moment 💍</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page">
+<h1>Will You Be Mine Forever? 💕</h1>
+<button class="btn" onclick="yesClick()">YES</button>
+<button class="btn" id="no">NO</button>
+</div>
+
+<script>
+document.getElementById("names").innerText=BOY_NAME+" ❤️ "+GIRL_NAME;
+
+/* STARS */
+for(let i=0;i<120;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+document.body.appendChild(s);
+}
+
+/* NAV */
+let pages=document.querySelectorAll(".page"),i=0;
+document.querySelectorAll(".next").forEach(b=>{
+b.onclick=()=>{pages[i++].classList.remove("active");pages[i].classList.add("active");};
+});
+
+/* SWIPE */
+let sx=0;
+document.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+if(sx-e.changedTouches[0].clientX>50 && i<pages.length-1){
+pages[i++].classList.remove("active");
+pages[i].classList.add("active");
+}
+});
+
+/* MUSIC */
+musicBtn.onclick=()=>music.paused?music.play():music.pause();
+
+/* HEART + ROSE */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
+
+setInterval(()=>{
+let r=document.createElement("div");
+r.className="petal";r.innerHTML="🌹";
+r.style.left=Math.random()*100+"vw";
+document.body.appendChild(r);
+setTimeout(()=>r.remove(),8000);
+},1200);
+
+/* BUTTERFLIES */
+for(let j=0;j<8;j++){
+let b=document.createElement("div");
+b.className="butterfly";b.innerHTML="🦋";
+document.body.appendChild(b);
+}
+
+/* NO BUTTON MOVE */
+const no=document.getElementById("no");
+setInterval(()=>{
+no.style.left=Math.random()*80+"%";
+no.style.top=Math.random()*80+"%";
+},700);
+
+/* YES CLICK */
+function yesClick(){
+for(let k=0;k<30;k++){
+let f=document.createElement("div");
+f.className="firework";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+}
+
+/* RING */
+let ring=document.createElement("div");
+ring.id="ring";
+ring.innerHTML="💍";
+ring.style.left="50%";
+ring.style.top="50%";
+ring.style.transform="translate(-50%,-50%)";
+document.body.appendChild(ring);
+
+setTimeout(()=>alert("She said YES ❤️✨"),1200);
+}
+</script>
+
+</body>
+</html>
